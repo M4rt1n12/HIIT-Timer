@@ -1,9 +1,10 @@
 #!/bin/bash
 
 # File paths for the WAV files
-PREP_BEEP="/path-to/prep_beep.wav"
-STOP_BEEP="/path-to/stop_beep.wav"
-INTERVAL_BEEP="/path-to/interval_beep.wav"
+PFAD="/home/martin/bin/HIIT"
+PREP_BEEP="$PFAD/prep_beep.wav"
+STOP_BEEP="$PFAD/stop_beep.wav"
+INTERVAL_BEEP="$PFAD/interval_beep.wav"
 
 # Function to play the WAV files
 function play_beep() {
@@ -63,6 +64,10 @@ while (( elapsed < end_time )); do
         play_beep "$INTERVAL_BEEP"
     else
         play_beep "$STOP_BEEP"
+    fi
+    if (( counter == 9 )); then
+        play_beep "$INTERVAL_BEEP"
+        break
     fi
 
     # Check if the time is up
