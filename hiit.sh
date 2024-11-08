@@ -8,7 +8,17 @@ INTERVAL_BEEP="$PFAD/interval_beep.wav"
 
 # Function to play the WAV files
 function play_beep() {
+    # Get the current volume
+    current_volume=$(amixer get Master | grep -oP '\d+(?=%)' | head -n 1)
+
+    # Set volume to 75%
+    amixer set Master 35%
+
+    # Play the audio file
     aplay "$1" &>/dev/null
+
+    # Restore the original volume
+    amixer set Master "${current_volume}%"
 }
 
 # Function for the countdown display
